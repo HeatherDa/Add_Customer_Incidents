@@ -2107,9 +2107,8 @@ SELECT CustomerID, Name, Address, City, State, ZipCode, Phone, Email FROM Custom
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[4].Connection = this.Connection;
             this._commandCollection[4].CommandText = "SELECT CustomerID, Name, Address, City, State, ZipCode, Phone, Email \r\nFROM dbo.C" +
-                "ustomers\r\nWHERE State LIKE \"\'\"+@State+\"%\'\"";
+                "ustomers\r\nWHERE State LIKE \"\'@State%\'\" ORDER BY City";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@State", global::System.Data.SqlDbType.VarChar, 2, global::System.Data.ParameterDirection.Input, 0, 0, "State", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2203,14 +2202,8 @@ SELECT CustomerID, Name, Address, City, State, ZipCode, Phone, Email FROM Custom
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillBy3(TechSupport_DataDataSet.CustomersDataTable dataTable, string State) {
+        public virtual int FillBy3(TechSupport_DataDataSet.CustomersDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[4];
-            if ((State == null)) {
-                throw new global::System.ArgumentNullException("State");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(State));
-            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }

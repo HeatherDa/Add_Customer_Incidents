@@ -50,7 +50,7 @@ namespace Add_Customer_Incidents
             {
                 if (dataValidation())
                 {
-                    string productCode = cbProducts.SelectedValue.ToString();
+                    string productCode = cbProducts.SelectedValue.ToString();//cbProducts displays name but returns code 
                     int custID = int.Parse(txtCustomerID.Text);
                     this.Tag = custID;
                     this.incidentsTableAdapter.InsertQuery(custID, productCode, DateTime.Today, txtTitle.Text, txtDescription.Text);
