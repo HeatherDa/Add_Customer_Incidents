@@ -39,18 +39,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtCustID = new System.Windows.Forms.TextBox();
-            this.txtCustName = new System.Windows.Forms.TextBox();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.incidentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.incidentsTableAdapter = new Add_Customer_Incidents.TechSupport_DataDataSetTableAdapters.IncidentsTableAdapter();
+            this.customersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.customersTableAdapter = new Add_Customer_Incidents.TechSupport_DataDataSetTableAdapters.CustomersTableAdapter();
+            this.txtCustomerID = new System.Windows.Forms.TextBox();
+            this.txtCustName = new System.Windows.Forms.TextBox();
             nameLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.techSupport_DataDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.incidentsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // nameLabel
@@ -134,22 +137,6 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "Description:";
             // 
-            // txtCustID
-            // 
-            this.txtCustID.Location = new System.Drawing.Point(88, 10);
-            this.txtCustID.Name = "txtCustID";
-            this.txtCustID.ReadOnly = true;
-            this.txtCustID.Size = new System.Drawing.Size(100, 20);
-            this.txtCustID.TabIndex = 6;
-            // 
-            // txtCustName
-            // 
-            this.txtCustName.Location = new System.Drawing.Point(88, 35);
-            this.txtCustName.Name = "txtCustName";
-            this.txtCustName.ReadOnly = true;
-            this.txtCustName.Size = new System.Drawing.Size(233, 20);
-            this.txtCustName.TabIndex = 8;
-            // 
             // txtTitle
             // 
             this.txtTitle.Location = new System.Drawing.Point(88, 120);
@@ -195,19 +182,46 @@
             // 
             this.incidentsTableAdapter.ClearBeforeFill = true;
             // 
+            // customersBindingSource
+            // 
+            this.customersBindingSource.DataMember = "Customers";
+            this.customersBindingSource.DataSource = this.techSupport_DataDataSet;
+            // 
+            // customersTableAdapter
+            // 
+            this.customersTableAdapter.ClearBeforeFill = true;
+            // 
+            // txtCustomerID
+            // 
+            this.txtCustomerID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customersBindingSource, "CustomerID", true));
+            this.txtCustomerID.Location = new System.Drawing.Point(88, 10);
+            this.txtCustomerID.Name = "txtCustomerID";
+            this.txtCustomerID.ReadOnly = true;
+            this.txtCustomerID.Size = new System.Drawing.Size(100, 20);
+            this.txtCustomerID.TabIndex = 13;
+            // 
+            // txtCustName
+            // 
+            this.txtCustName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customersBindingSource, "Name", true));
+            this.txtCustName.Location = new System.Drawing.Point(88, 35);
+            this.txtCustName.Name = "txtCustName";
+            this.txtCustName.ReadOnly = true;
+            this.txtCustName.Size = new System.Drawing.Size(173, 20);
+            this.txtCustName.TabIndex = 14;
+            // 
             // AddIncident
             // 
             this.AcceptButton = this.btnAdd;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(463, 275);
+            this.ClientSize = new System.Drawing.Size(463, 281);
+            this.Controls.Add(this.txtCustName);
+            this.Controls.Add(this.txtCustomerID);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtTitle);
-            this.Controls.Add(this.txtCustName);
-            this.Controls.Add(this.txtCustID);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -220,6 +234,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.techSupport_DataDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.incidentsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,13 +251,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCustID;
-        private System.Windows.Forms.TextBox txtCustName;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.BindingSource incidentsBindingSource;
         private TechSupport_DataDataSetTableAdapters.IncidentsTableAdapter incidentsTableAdapter;
+        private System.Windows.Forms.BindingSource customersBindingSource;
+        private TechSupport_DataDataSetTableAdapters.CustomersTableAdapter customersTableAdapter;
+        private System.Windows.Forms.TextBox txtCustomerID;
+        private System.Windows.Forms.TextBox txtCustName;
     }
 }

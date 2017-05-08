@@ -2101,7 +2101,7 @@ SELECT CustomerID, Name, Address, City, State, ZipCode, Phone, Email FROM Custom
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
             this._commandCollection[3].CommandText = "SELECT CustomerID, Name, Address, City, State, ZipCode, Phone, Email \r\nFROM dbo.C" +
-                "ustomers\r\nWHERE State=@State";
+                "ustomers\r\nWHERE State=@State ORDER BY City";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@State", global::System.Data.SqlDbType.VarChar, 2, global::System.Data.ParameterDirection.Input, 0, 0, "State", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
@@ -2180,6 +2180,23 @@ SELECT CustomerID, Name, Address, City, State, ZipCode, Phone, Email FROM Custom
             }
             int returnValue = this.Adapter.Fill(dataTable);
             return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual TechSupport_DataDataSet.CustomersDataTable GetDataBy2(string State) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((State == null)) {
+                throw new global::System.ArgumentNullException("State");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(State));
+            }
+            TechSupport_DataDataSet.CustomersDataTable dataTable = new TechSupport_DataDataSet.CustomersDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3223,11 +3240,18 @@ SELECT ProductCode, Name, Version, ReleaseDate FROM Products WHERE (ProductCode 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ProductCode, Name, Version, ReleaseDate FROM dbo.Products";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT dbo.Registrations.ProductCode, Name, Version, ReleaseDate \r\nFROM dbo.Produ" +
+                "cts\r\nJOIN dbo.Registrations \r\nON dbo.Registrations.ProductCode=dbo.Products.Prod" +
+                "uctCode\r\nWHERE CustomerID=@CustomerID";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CustomerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3252,6 +3276,20 @@ SELECT ProductCode, Name, Version, ReleaseDate FROM Products WHERE (ProductCode 
             TechSupport_DataDataSet.ProductsDataTable dataTable = new TechSupport_DataDataSet.ProductsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByCustomerCode(TechSupport_DataDataSet.ProductsDataTable dataTable, int CustomerID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(CustomerID));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

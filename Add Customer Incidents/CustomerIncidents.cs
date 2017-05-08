@@ -76,28 +76,27 @@ namespace Add_Customer_Incidents
             {
                 return true;
             }
-            MessageBox.Show("CustomerID must be an integer");
+            MessageBox.Show("CustomerID is required and it must be an integer.");
             return false;
         }
 
         private void btnAddIncident_Click(object sender, EventArgs e)
         {
-            string info =customerIDTextBox.Text+" "+nameTextBox.Text;
-
-            Form addIncident = new AddIncident(info);
-            DialogResult selectedButton = addIncident.ShowDialog();
-            if (selectedButton == DialogResult.OK)
+            if (dataValidation())
             {
-                int customerID = int.Parse(addIncident.Tag.ToString());
-                fillByID(customerID);
+                string info = customerIDTextBox.Text;
+
+                Form addIncident = new AddIncident(info);
+                DialogResult selectedButton = addIncident.ShowDialog();
+                if (selectedButton == DialogResult.OK)
+                {
+                    int customerID = int.Parse(addIncident.Tag.ToString());
+                    fillByID(customerID);
+                }
             }
         }
 
-        private void clearData()
-        {
-            //incidentsDataGridView.Rows.Clear();
-            incidentsDataGridView.Refresh();
-        }
+        
 
     }
 }

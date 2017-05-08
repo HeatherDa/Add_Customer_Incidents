@@ -51,24 +51,42 @@ namespace Add_Customer_Incidents
 
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void btnOK_Click(object sender, EventArgs e)//handles ok button and double click
         {
-            this.Tag = customerID;
-            this.DialogResult = DialogResult.OK;    
+            if(customersBindingSource.Count <= 0|| stateToolStripTextBox.Text=="")
+            {
+                this.DialogResult = DialogResult.Cancel;
+            }
+
+            else if (customerID == 0)
+            {
+                string cID = customersDataGridView.Rows[0].Cells[0].Value.ToString();
+                customerID = int.Parse(cID);
+                
+                this.Tag = customerID;
+                this.DialogResult = DialogResult.OK;
+            }
+            else if (customersDataGridView.SelectedCells.Count > 0)//some row is selected
+            {
+                this.Tag = customerID;
+                this.DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void customerIDSet()
+        {
+            int selectedRowIndex = customersDataGridView.SelectedCells[0].RowIndex;
+            DataGridViewRow row = customersDataGridView.Rows[selectedRowIndex];
+            string idString = Convert.ToString(row.Cells[0].Value);
+            customerID = int.Parse(idString);
+            MessageBox.Show(idString);
         }
 
         private void CellClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (customersDataGridView.SelectedCells.Count > 0)
             {
-                int selectedRowIndex = customersDataGridView.SelectedCells[0].RowIndex;
-                DataGridViewRow row = customersDataGridView.Rows[selectedRowIndex]; 
-                string idString = Convert.ToString(row.Cells[0].Value);
-                customerID = int.Parse(idString);
-            }
-            else if (customersDataGridView.SelectedCells.Count <= 0)
-            {
-                MessageBox.Show("Please select a row by double clicking or clicking on the arrow to the left of the desired row.");
+                customerIDSet();
             }
         }
 
