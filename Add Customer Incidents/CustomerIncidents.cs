@@ -44,9 +44,6 @@ namespace Add_Customer_Incidents
                 }
             }
         }
-
-        
-
         private void btnStateSearch_Click(object sender, EventArgs e)
         {
             FindCustomer fc=new FindCustomer();
@@ -95,8 +92,5 @@ namespace Add_Customer_Incidents
                 }
             }
         }
-
-        
-
     }
 }
